@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Login — Sistem Absensi</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    body {
+      background: linear-gradient(160deg, #e7f0ff 0%, #f4f7fb 60%, #fff 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .phone-shell { justify-content: center; }
+
+    /* ── BRAND ── */
+    .login-brand { text-align: center; margin-bottom: 36px; }
+    .brand-circle {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: var(--primary);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 36px; color: #fff; margin-bottom: 14px;
+      box-shadow: 0 8px 24px rgba(13,110,253,.3);
+    }
+    .brand-name { font-size: 22px; font-weight: 700; color: #1a2a4a; margin-bottom: 4px; }
+    .brand-sub  { font-size: 13px; color: #7a8a9e; }
+
+    /* ── LOGIN CARD ── */
+    .login-card {
+      background: #fff;
+      border-radius: var(--card-radius);
+      padding: 28px 24px;
+      box-shadow: 0 4px 24px rgba(13,110,253,.08);
+    }
+    .login-card .form-label { font-size: 13px; font-weight: 600; color: #4a5568; margin-bottom: 6px; }
+    .login-card .form-control {
+      border-radius: 0 10px 10px 0;
+      border: 1.5px solid #e2e8f0;
+      border-left: 0;
+      padding: 11px 14px;
+      font-size: 14px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .login-card .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(13,110,253,.12);
+    }
+    .login-card .input-group-text {
+      border-radius: 10px 0 0 10px;
+      border: 1.5px solid #e2e8f0;
+      border-right: 0;
+      background: #f8faff;
+      color: #9aa5b4;
+    }
+
+    /* ── BUTTON ── */
+    .btn-login {
+      background: var(--primary); color: #fff; border: none;
+      border-radius: 10px; padding: 13px; font-size: 15px; font-weight: 600;
+      width: 100%; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: background .15s, transform .1s;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .btn-login:hover  { background: var(--primary-dark); }
+    .btn-login:active { transform: scale(.98); }
+
+    .login-hint { font-size: 12px; color: #9aa5b4; text-align: center; margin-top: 14px; }
+  </style>
+</head>
+<body>
+
+<div class="phone-shell">
+  <!-- Status Bar -->
+  <div class="status-bar">
+    <span id="clock">09:41</span>
+    <span><i class="bi bi-wifi"></i> <i class="bi bi-battery-half"></i></span>
+  </div>
+
+  <!-- Content -->
+  <div style="padding: 32px 24px; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+
+    <!-- Brand -->
+    <div class="login-brand">
+      <div class="brand-circle"><i class="bi bi-mortarboard-fill"></i></div>
+      <div class="brand-name">Sistem Absensi</div>
+      <div class="brand-sub"></div>
+    </div>
+
+    <!-- Form -->
+    <div class="login-card">
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-person"></i></span>
+          <input type="text" id="inp-user" class="form-control" placeholder="Masukkan username">
+        </div>
+      </div>
+      <div class="mb-4">
+        <label class="form-label">Password</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-lock"></i></span>
+          <input type="password" id="inp-pass" class="form-control" placeholder="Masukkan password"
+                 onkeydown="if(event.key==='Enter') doLogin()">
+        </div>
+      </div>
+      <button class="btn-login" onclick="doLogin()">
+        <i class="bi bi-box-arrow-in-right"></i> Masuk
+      </button>
+      <p class="login-hint">Demo: <strong>admin</strong> / <strong>admin123</strong></p>
+    </div>
+
+  </div>
+</div>
+
+<!-- Toast container -->
+<div class="toast-wrap" id="toast-wrap"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/data.js"></script>
+<script>
+  startClock();
+
+  function doLogin() {
+    const u = document.getElementById('inp-user').value.trim();
+    const p = document.getElementById('inp-pass').value;
+    if (u === 'admin' && p === 'admin123') {
+      window.location.href = 'beranda.html';
+    } else {
+      showToast('Username atau password salah.', 'danger');
+    }
+  }
+</script>
+</body>
+</html>

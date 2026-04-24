@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Profil — Sistem Absensi</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* ── PROFILE HERO ── */
+    .profile-hero {
+      background: linear-gradient(135deg, var(--primary) 0%, #0a58ca 100%);
+      color: #fff;
+      padding: 32px 20px 28px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .profile-avatar-wrap {
+      width: 84px; height: 84px; border-radius: 50%;
+      background: rgba(255,255,255,.2);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 36px; margin-bottom: 14px;
+      border: 2.5px solid rgba(255,255,255,.5);
+    }
+    .profile-name  { font-size: 20px; font-weight: 700; margin-bottom: 3px; }
+    .profile-email { font-size: 13px; opacity: .85; }
+
+    /* ── PROFILE ROWS ── */
+    .profile-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0; border-bottom: 1px solid #f0f4f9; font-size: 13px;
+    }
+    .profile-row:last-child { border-bottom: none; }
+    .profile-row .lbl { color: #9aa5b4; font-weight: 500; }
+    .profile-row .val { font-weight: 600; color: #1a2a4a; }
+
+    /* ── LOGOUT BUTTON ── */
+    .btn-logout {
+      background: #fee2e2; color: #991b1b; border: none;
+      border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 600;
+      width: 100%; cursor: pointer; margin-top: 8px;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: background .15s; font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .btn-logout:hover { background: #fecaca; }
+
+    .page-body { background: #fff; }
+  </style>
+</head>
+<body>
+
+<div class="phone-shell">
+  <!-- Status Bar -->
+  <div class="status-bar">
+    <span id="clock">09:41</span>
+    <span><i class="bi bi-wifi"></i> <i class="bi bi-battery-half"></i></span>
+  </div>
+
+  <!-- Profile Hero (replaces top-header) -->
+  <div class="profile-hero">
+    <div class="profile-avatar-wrap">
+      <i class="bi bi-person-fill"></i>
+    </div>
+    <div class="profile-name">Administrator</div>
+    <div class="profile-email">admin@univ.ac.id</div>
+  </div>
+
+  <!-- Body -->
+  <div class="page-body" style="flex:1;overflow-y:auto;padding:16px;padding-bottom:calc(var(--nav-h) + 16px);">
+
+    <!-- Akun Info -->
+    <div class="card-box">
+      <div class="card-box-title">Informasi Akun</div>
+      <div class="profile-row">
+        <span class="lbl">Username</span>
+        <span class="val">admin</span>
+      </div>
+      <div class="profile-row">
+        <span class="lbl">Role</span>
+        <span class="val">Administrator</span>
+      </div>
+      <div class="profile-row">
+        <span class="lbl">Fakultas</span>
+        <span class="val">Teknik Informatika</span>
+      </div>
+      <div class="profile-row">
+        <span class="lbl">Semester</span>
+        <span class="val">Genap 2024/2025</span>
+      </div>
+    </div>
+
+    <!-- Statistik -->
+    <div class="card-box">
+      <div class="card-box-title">Statistik Kehadiran</div>
+      <div class="profile-row">
+        <span class="lbl">Total Mahasiswa</span>
+        <span class="val" id="p-total">0</span>
+      </div>
+      <div class="profile-row">
+        <span class="lbl">Hadir Hari Ini</span>
+        <span class="val" id="p-hadir" style="color:var(--success);">0</span>
+      </div>
+      <div class="profile-row">
+        <span class="lbl">Tidak Hadir</span>
+        <span class="val" id="p-absen" style="color:var(--danger);">0</span>
+      </div>
+    </div>
+
+    <!-- Logout -->
+    <button class="btn-logout" onclick="doLogout()">
+      <i class="bi bi-box-arrow-left"></i> Keluar
+    </button>
+
+  </div>
+
+  <!-- Bottom Nav -->
+  <div class="bottom-nav">
+    <button class="nav-item" onclick="window.location.href='beranda.html'"><i class="bi bi-house-fill"></i>Beranda</button>
+    <button class="nav-item" onclick="window.location.href='scan.html'"><i class="bi bi-qr-code-scan"></i>Scan QR</button>
+    <button class="nav-item active"><i class="bi bi-person-circle"></i>Profil</button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast-wrap" id="toast-wrap"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/data.js"></script>
+<script>
+  startClock();
+  updateStats();
+
+  function doLogout() {
+    if (confirm('Yakin ingin keluar?')) {
+      window.location.href = 'login.html';
+    }
+  }
+</script>
+</body>
+</html>
